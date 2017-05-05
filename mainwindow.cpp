@@ -190,7 +190,7 @@ void MainWindow::hashrateUpdated(double hashrate)
         minerprocess->close();
         minerprocess->waitForFinished(5000);
         delayedStart.start();
-        timeSinceMinerStarted = QDateTime::currentDateTime().addSecs(60*10);
+        timeSinceMinerStarted = QDateTime::currentDateTime();
         QString log = "<b>NanoPool reported a hashrate of: "+QString::number(hashrate)+" for your worker. Killing miner</b>";
         api->makeLog(log);
         ui->textBrowser->append(QDateTime::currentDateTime().toString(datetimestring) + log);
