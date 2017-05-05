@@ -15,14 +15,32 @@
 // You should have received a copy of the GNU General Public License
 // along with MinerWatch.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "mainwindow.h"
-#include <QApplication>
+#ifndef ABOUTDIALOG_H
+#define ABOUTDIALOG_H
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+#include <QDialog>
+#include <QMessageBox>
+#include <QClipboard>
 
-    return a.exec();
+namespace Ui {
+class AboutDialog;
 }
+
+class AboutDialog : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit AboutDialog(QWidget *parent = 0);
+    ~AboutDialog();
+
+private slots:
+    void on_pushButton_btc_pressed();
+    void on_pushButton_zcash_pressed();    
+    void on_pushButton_eth_pressed();
+
+private:
+    Ui::AboutDialog *ui;
+};
+
+#endif // ABOUTDIALOG_H
