@@ -12,7 +12,7 @@ Currently supports these pools:
 - Ethpool Ethereum
 
 I have no where to host the program atm, but I've made a torrent.
-[TorrentMagnetLink](www.test.com)
+[TorrentMagnetLink](magnet:?xt=urn:btih:fde53cbc5df699d26d20f63e4d72af17e1387d25&dn=MinerWatch_v0.0.1_win-x32.rar&tr=udp%3a%2f%2ftracker.mg64.net%3a6969%2fannounce&tr=http%3a%2f%2ftracker.mg64.net%3a6881%2fannounce&tr=udp%3a%2f%2fmgtracker.org%3a6969%2fannounce&tr=http%3a%2f%2fmgtracker.org%3a6969%2fannounce&tr=http%3a%2f%2fexplodie.org%3a6969%2fannounce&tr=udp%3a%2f%2fexplodie.org%3a6969%2fannounce&tr=http%3a%2f%2ftracker.videodrugproject.com%3a80%2fannounce&tr=udp%3a%2f%2ftracker.coppersurfer.tk%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.leechers-paradise.org%3a6969%2fannounce&tr=http%3a%2f%2ftracker.opentrackr.org%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.zer0day.to%3a1337%2fannounce&tr=http%3a%2f%2fp4p.arenabg.com%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.internetwarriors.net%3a1337%2fannounce&tr=udp%3a%2f%2fp4p.arenabg.com%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.pirateparty.gr%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.opentrackr.org%3a1337%2fannounce&tr=udp%3a%2f%2f9.rarbg.com%3a2710%2fannounce&tr=http%3a%2f%2ftracker.internetwarriors.net%3a1337%2fannounce&tr=udp%3a%2f%2finferno.demonoid.ooo%3a3389%2fannounce&tr=udp%3a%2f%2ftracker.cuntflaps.me%3a6969%2fannounce)
 
 If you like this program, or want support for a pool not listed
 please consider donating, addresses can be found in the program.
