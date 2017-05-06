@@ -88,6 +88,12 @@ void nanopool_api::getCurrentHashRate()
                 addr = account_name;
             netManager->get(QNetworkRequest(QUrl("http://ethpool.org/api/miner_new/"+addr)));
         }
+    else
+        if (pool == "slushpool")
+        {
+            //netManager->get(QNetworkRequest(QUrl("https://slushpool.com/accounts/profile/json/"+account_name)));
+            netManager->get(QNetworkRequest(QUrl("https://slushpool.com/stats/json/"+account_name)));
+        }
 }
 
 
@@ -122,5 +128,10 @@ void nanopool_api::netReplyFinished(QNetworkReply *reply)
                  QString hashrate = json.value(worker_name).toObject().value("hashrate").toString();
                  emit hashrateUpdate(hashrate.mid(0, hashrate.indexOf(" ")).toDouble());
              }
+         }
+     else
+         if (pool == "slushpool")
+         {
+             qDebug() << "slushpool yo..." << data;
          }
 }

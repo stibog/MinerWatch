@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->buttonGroup->setId(ui->radioButton_pool_nanozec, 1);
     ui->buttonGroup->setId(ui->radioButton_pool_nanoeth, 2);
     ui->buttonGroup->setId(ui->radioButton_ethpool, 3);
+    ui->buttonGroup->setId(ui->radioButton_slushpool, 4);
 
     LoadSettings();        
     ui->statusBar->hide();
@@ -40,7 +41,6 @@ MainWindow::MainWindow(QWidget *parent) :
     delayedStart.setInterval(500);
     delayedStart.setSingleShot(true);
     connect(&delayedStart, SIGNAL(timeout()), this, SLOT(StartMining()));
-
     hashChart = new QChart();
     hashSeries = new QLineSeries(this);    
     hashScatterSeries = new QScatterSeries(this);
@@ -99,6 +99,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->dateTimeEdit_hash_to, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(on_HashChart_DateChanged()));
     connect(ui->dateTimeEdit_hash_from, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(on_HashChart_DateChanged()));
     ui->buttonGroup->setExclusive(true);
+
+    ui->radioButton_slushpool->hide();
 }
 
 MainWindow::~MainWindow()
@@ -377,6 +379,14 @@ void MainWindow::on_radioButton_ethpool_toggled(bool checked)
         api->setPoolAndCoin("ethpool", "eth");
     }
 }
+void MainWindow::on_radioButton_slushpool_toggled(bool checked)
+{
+    if (checked)
+    {
+        api->setPoolAndCoin("slushpool", "zec");
+    }
+}
+
 
 void MainWindow::on_checkBox_toggled(bool checked)
 {
@@ -418,3 +428,4 @@ void MainWindow::on_pushButton_eth_pressed()
     QMessageBox::information(this, "Thank you!", "Donation Ethereum address \"0x1B74929CaEB99cF17FD603F734ccE9Df9b752Bd7\" copied to clipboard.", QMessageBox::Ok);
 
 }
+

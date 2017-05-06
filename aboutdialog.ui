@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>512</width>
-    <height>282</height>
+    <width>541</width>
+    <height>289</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,8 +34,9 @@ MinerWatch is made by:&lt;br&gt;
 Stian &quot;Wooly&quot; Bogevik &lt;br&gt;
 Email: &lt;a href=&quot;mailto:stian@bogevik.no&quot;&gt;stian@bogevik.no&lt;/a&gt;&lt;br&gt;
 &lt;br&gt;
-Suggestions and/or ideas will be considered.&lt;br&gt;
-&lt;br&gt;
+Send me bugs, suggestions and/or ideas.&lt;br&gt;
+If you need code, I'll help. Send me the best possible discription of your task, for an inquiry.
+&lt;br&gt;&lt;br&gt;
 If you like this software, please consider donating.</string>
      </property>
      <property name="scaledContents">

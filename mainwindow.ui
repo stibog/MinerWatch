@@ -209,6 +209,19 @@
            </attribute>
           </widget>
          </item>
+         <item>
+          <widget class="QRadioButton" name="radioButton_slushpool">
+           <property name="text">
+            <string>Slushpool ZCash</string>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">buttonGroup</string>
+           </attribute>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>

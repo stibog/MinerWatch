@@ -59,6 +59,8 @@ private slots:
 
     void on_pushButton_eth_pressed();
 
+    void on_radioButton_slushpool_toggled(bool checked);
+
 private:
     Ui::MainWindow *ui;
     void setMinerBat(QString file);
