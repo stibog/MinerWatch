@@ -11,7 +11,7 @@ Currently supports these pools:
 - Nanopool Ethereum
 - Ethpool Ethereum
 
-Building from source:
+Building from source:<br>
 Open .pro file and build with Qt Creator. No dependency besides Qt.
 
 Download prebuildt packages:<br>
