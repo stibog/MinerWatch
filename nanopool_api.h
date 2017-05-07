@@ -57,6 +57,7 @@ private:
     QTimer *hashRateTimer;
     QString pool="nanopool";
     QString coin="zec";
+    QString email="";
 };
 
 #endif // NANOPOOL_API_H

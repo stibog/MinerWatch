@@ -23,11 +23,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->label_email->hide();
+    ui->lineEdit_email->hide();
     timeSinceMinerStarted=QDateTime::currentDateTime().addYears(1);
     ui->buttonGroup->setId(ui->radioButton_pool_nanozec, 1);
     ui->buttonGroup->setId(ui->radioButton_pool_nanoeth, 2);
     ui->buttonGroup->setId(ui->radioButton_ethpool, 3);
     ui->buttonGroup->setId(ui->radioButton_slushpool, 4);
+    ui->buttonGroup->setId(ui->radioButton_dwarfeth, 5);
+    ui->buttonGroup->setId(ui->radioButton_dwarfzec, 6);
 
     LoadSettings();        
     ui->statusBar->hide();
@@ -213,6 +217,7 @@ void MainWindow::LoadSettings()
     ui->spinBox->setValue(settings.value("sol_limit").toInt());
     ui->checkBox_autoshowlast->setChecked(settings.value("autoshowlast_checkbox", 0).toBool());
     ui->spinBox_hourinterval->setValue(settings.value("autoshowlast_hours", 6).toInt());
+    ui->lineEdit_email->setText(settings.value("email", "").toString());
 
     api = new nanopool_api(ui->lineEdit_account->text(), ui->lineEdit_worker->text(), this);
     connect(api, SIGNAL(hashrateUpdate(double)), this, SLOT(hashrateUpdated(double)));
@@ -236,6 +241,7 @@ void MainWindow::SaveSettings()
     settings.setValue("pool", ui->buttonGroup->checkedId());
     settings.setValue("autoshowlast_checkbox", ui->checkBox_autoshowlast->isChecked());
     settings.setValue("autoshowlast_hours", ui->spinBox_hourinterval->value());
+    settings.setValue("email", ui->lineEdit_email->text());
     settings.endGroup();
 }
 
@@ -429,3 +435,23 @@ void MainWindow::on_pushButton_eth_pressed()
 
 }
 
+
+void MainWindow::on_radioButton_dwarfzec_toggled(bool checked)
+{
+    if (checked)
+    {
+        api->setPoolAndCoin("dwarfpool", "zec");
+    }
+    ui->label_email->setVisible(checked);
+    ui->lineEdit_email->setVisible(checked);
+}
+
+void MainWindow::on_radioButton_dwarfeth_toggled(bool checked)
+{
+    if (checked)
+    {
+        api->setPoolAndCoin("dwarfpool", "eth");
+    }
+    ui->label_email->setVisible(checked);
+    ui->lineEdit_email->setVisible(checked);
+}

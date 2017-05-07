@@ -71,7 +71,7 @@ void nanopool_api::setWorkerName(QString worker)
 
 
 void nanopool_api::getCurrentHashRate()
-{
+{    
     if (pool == "nanopool")
     {
         QString req = "hashrate/%1/%2";
@@ -94,6 +94,18 @@ void nanopool_api::getCurrentHashRate()
             //netManager->get(QNetworkRequest(QUrl("https://slushpool.com/accounts/profile/json/"+account_name)));
             netManager->get(QNetworkRequest(QUrl("https://slushpool.com/stats/json/"+account_name)));
         }
+    else
+        if (pool == "dwarfpool")
+        {
+            QString mail;
+            if (email == "")
+                mail = "eth@example.com";
+            else
+                mail = email;
+            QString req = "http://dwarfpool.com/"+coin+"/api?wallet="+account_name+"&email="+mail;
+            qDebug() << "request..:" << req;
+            netManager->get(QNetworkRequest(QUrl(req)));
+        }
 }
 
 
@@ -101,6 +113,7 @@ void nanopool_api::netReplyFinished(QNetworkReply *reply)
 {
 
      QByteArray data = reply->readAll();
+     //qDebug() << "Pool:" << pool << "\ndata:" << data;
      if (data.isEmpty())
      {
         makeLog("Received NULL reply. Clearing access Cache.");
@@ -132,6 +145,16 @@ void nanopool_api::netReplyFinished(QNetworkReply *reply)
      else
          if (pool == "slushpool")
          {
-             qDebug() << "slushpool yo..." << data;
+             qDebug() << "slushpool..." << data;
+         }
+     else
+         if (pool == "dwarfpool")
+         {
+             json = json["workers"].toObject();
+             if (json.keys().contains(worker_name))
+             {
+                json = json[worker_name].toObject();
+                emit hashrateUpdate(json.value("hashrate").toDouble());
+             }
          }
 }

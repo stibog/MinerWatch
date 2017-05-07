@@ -61,6 +61,10 @@ private slots:
 
     void on_radioButton_slushpool_toggled(bool checked);
 
+    void on_radioButton_dwarfzec_toggled(bool checked);
+
+    void on_radioButton_dwarfeth_toggled(bool checked);
+
 private:
     Ui::MainWindow *ui;
     void setMinerBat(QString file);
