@@ -15,7 +15,7 @@ Building from source:<br>
 Open .pro file and build with Qt Creator. No dependency besides Qt.
 
 Download prebuildt packages:<br>
-[Windows 32bit](http://s000.tinyupload.com/index.php?file_id=90129162813173884132)
+[Windows 32bit](http://s000.tinyupload.com/index.php?file_id=78544909251193418632)
 
 If you like this program, or want support for a pool not listed
 please consider donating, addresses can be found in the program.
