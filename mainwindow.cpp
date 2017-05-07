@@ -336,7 +336,7 @@ void MainWindow::setMinerBat(QString file)
             qDebug() << "is excecutable...";
 
              minerprocess->setWorkingDirectory(dir.toNativeSeparators(info.absoluteDir().absolutePath()));
-             minerprocess->setProgram(minerprocess->workingDirectory()+QDir::separator()+bat.fileName());
+             minerprocess->setProgram(ui->lineEdit_miner_loc->text());
              return;
         }
        if (bat.open(QIODevice::ReadOnly))
