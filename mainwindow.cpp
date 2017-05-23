@@ -29,14 +29,20 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->buttonGroup->setId(ui->radioButton_pool_nanozec, 1);
     ui->buttonGroup->setId(ui->radioButton_pool_nanoeth, 2);
     ui->buttonGroup->setId(ui->radioButton_ethpool, 3);
-    ui->buttonGroup->setId(ui->radioButton_slushpool, 4);
+    ui->buttonGroup->setId(ui->radioButton_flypool_eth, 4);
     ui->buttonGroup->setId(ui->radioButton_dwarfeth, 5);
     ui->buttonGroup->setId(ui->radioButton_dwarfzec, 6);
+    ui->buttonGroup->setId(ui->radioButton_flypool_zec, 7);
 
     LoadSettings();        
     ui->statusBar->hide();
+
+    minerapi = new miner_api(this);
+    connect(minerapi, SIGNAL(statusupdate(QString)), ui->label_miner_status, SLOT(setText(QString)));
+
     minerprocess = new QProcess(this);    
     setMinerBat(ui->lineEdit_miner_loc->text());
+
 
 
     connect(minerprocess, SIGNAL(stateChanged(QProcess::ProcessState)), this, SLOT(minerprocess_stateChanged(QProcess::ProcessState)));
@@ -104,7 +110,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->dateTimeEdit_hash_from, SIGNAL(dateTimeChanged(QDateTime)), this, SLOT(on_HashChart_DateChanged()));
     ui->buttonGroup->setExclusive(true);
 
-    ui->radioButton_slushpool->hide();
+
 }
 
 MainWindow::~MainWindow()
@@ -123,7 +129,9 @@ MainWindow::~MainWindow()
     delete hashChartView;
     delete ui;
     delete api;
-    minerprocess->deleteLater();    
+    minerprocess->deleteLater();
+
+    delete minerapi;
 }
 
 void MainWindow::on_pushButton_pressed()
@@ -187,6 +195,8 @@ void MainWindow::hashrateUpdated(double hashrate)
                 hashChart->axisY()->setMin(hashrate);
         }
         lastReportedHashrate=hashrate;
+        hashScatterSeries->setPointLabelsVisible(!ui->checkBox->isChecked());
+        hashScatterSeries->setVisible(!ui->checkBox_2->isChecked());
     }
 
     if (hashrate <= ui->spinBox->value() && QDateTime::currentDateTime().toMSecsSinceEpoch() >= timeSinceMinerStarted.addSecs(60*10).toMSecsSinceEpoch() && minerprocess->state() == QProcess::Running)
@@ -254,6 +264,7 @@ void MainWindow::on_pushButton_2_pressed()
     else
     {
         delayedStart.stop();
+        minerapi->startstop(false);
         manual_restart=1;
         minerprocess->close();
         minerprocess->waitForFinished(-1);
@@ -325,6 +336,7 @@ void MainWindow::StartMining()
         qDebug() << minerprocess->program() << minerprocess->arguments();
         minerprocess->start();
         ui->pushButton_2->setText("Stop");
+        minerapi->startstop(true);
     }
 }
 
@@ -355,6 +367,15 @@ void MainWindow::setMinerBat(QString file)
            {
                args << lst.at(i);
            }
+
+           if (prg == "miner.exe" || prg == "miner")
+           {
+               args << "--api";
+               if (!args.contains("--eexit"))
+                   args << "--eexit";
+               minerapi->setMinerType("ewbf");
+           }
+
            minerprocess->setWorkingDirectory(dir.toNativeSeparators(info.absoluteDir().absolutePath()));
            minerprocess->setProgram(minerprocess->workingDirectory()+QDir::separator()+prg);
            minerprocess->setArguments(args);
@@ -385,14 +406,6 @@ void MainWindow::on_radioButton_ethpool_toggled(bool checked)
         api->setPoolAndCoin("ethpool", "eth");
     }
 }
-void MainWindow::on_radioButton_slushpool_toggled(bool checked)
-{
-    if (checked)
-    {
-        api->setPoolAndCoin("slushpool", "zec");
-    }
-}
-
 
 void MainWindow::on_checkBox_toggled(bool checked)
 {
@@ -454,4 +467,20 @@ void MainWindow::on_radioButton_dwarfeth_toggled(bool checked)
     }
     ui->label_email->setVisible(checked);
     ui->lineEdit_email->setVisible(checked);
+}
+
+void MainWindow::on_radioButton_flypool_eth_toggled(bool checked)
+{
+    if (checked)
+    {
+        api->setPoolAndCoin("flypool", "eth");
+    }
+}
+
+void MainWindow::on_radioButton_flypool_zec_toggled(bool checked)
+{
+    if (checked)
+    {
+        api->setPoolAndCoin("flypool", "zec");
+    }
 }

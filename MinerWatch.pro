@@ -30,11 +30,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     nanopool_api.cpp \
-    aboutdialog.cpp
+    aboutdialog.cpp \
+    miner_api.cpp
 
 HEADERS  += mainwindow.h \
     nanopool_api.h \
-    aboutdialog.h
+    aboutdialog.h \
+    miner_api.h
 
 FORMS    += mainwindow.ui \
     aboutdialog.ui

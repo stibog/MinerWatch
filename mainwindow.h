@@ -24,6 +24,7 @@
 #include <QProcess>
 #include "nanopool_api.h"
 #include "aboutdialog.h"
+#include "miner_api.h"
 
 namespace Ui {
 class MainWindow;
@@ -52,18 +53,13 @@ private slots:
     void on_checkBox_2_toggled(bool checked);
     void on_pushButton_3_pressed();
     void on_pushButton_4_pressed();
-
     void on_actionOpen_log_file_triggered();
-
     void on_actionMinerWatch_triggered();
-
     void on_pushButton_eth_pressed();
-
-    void on_radioButton_slushpool_toggled(bool checked);
-
     void on_radioButton_dwarfzec_toggled(bool checked);
-
     void on_radioButton_dwarfeth_toggled(bool checked);
+    void on_radioButton_flypool_eth_toggled(bool checked);
+    void on_radioButton_flypool_zec_toggled(bool checked);
 
 private:
     Ui::MainWindow *ui;
@@ -84,6 +80,7 @@ private:
 
    // int timesLow =0;
     QDateTime timeSinceMinerStarted;
+    miner_api *minerapi;
 
 };
 

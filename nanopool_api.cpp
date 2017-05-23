@@ -89,10 +89,13 @@ void nanopool_api::getCurrentHashRate()
             netManager->get(QNetworkRequest(QUrl("http://ethpool.org/api/miner_new/"+addr)));
         }
     else
-        if (pool == "slushpool")
+        if (pool == "flypool")
         {
             //netManager->get(QNetworkRequest(QUrl("https://slushpool.com/accounts/profile/json/"+account_name)));
-            netManager->get(QNetworkRequest(QUrl("https://slushpool.com/stats/json/"+account_name)));
+            if (coin == "zec")
+                netManager->get(QNetworkRequest(QUrl("https://zcash.flypool.org/api/miner_new/"+account_name)));
+            if (coin == "eth")
+                netManager->get(QNetworkRequest(QUrl("https://ethermine.org/api/miner_new/"+account_name)));
         }
     else
         if (pool == "dwarfpool")
@@ -143,9 +146,20 @@ void nanopool_api::netReplyFinished(QNetworkReply *reply)
              }
          }
      else
-         if (pool == "slushpool")
+         if (pool == "flypool")
          {
-             qDebug() << "slushpool..." << data;
+
+             json = json["workers"].toObject();
+
+             if (json.keys().contains(worker_name))
+             {
+                json = json[worker_name].toObject();
+                QString hashrate = json.value("hashrate").toString();
+                if (coin == "zec")
+                    emit hashrateUpdate(hashrate.mid(0, hashrate.indexOf("H")).toDouble());
+                if (coin == "eth")
+                    emit hashrateUpdate(hashrate.mid(0, hashrate.indexOf(" ")).toDouble());
+             }
          }
      else
          if (pool == "dwarfpool")
